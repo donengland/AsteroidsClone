@@ -11,7 +11,6 @@ namespace Tests
         private float _ySize;
         private int _breakdownsRemaining;
         private int _breakdownPieces;
-        private Bounds _bounds;
 
         public AsteroidBuilder WithPosition(Vector3 position)
         {
@@ -50,6 +49,7 @@ namespace Tests
             asteroid.SetSize(_xSize, _ySize);
             asteroid.SetBreakdownsRemaining(_breakdownsRemaining);
             asteroid.SetBreakdownPieces(_breakdownPieces);
+            AsteroidManager.Instance.Add(asteroid);
             return asteroid;
         }
 

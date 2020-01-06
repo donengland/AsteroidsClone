@@ -13,5 +13,10 @@ namespace DonEnglandArt
         {
             return new Vector3(x ?? original.x, y ?? original.y, z ?? original.z);
         }
+
+        public static Vector3 SetMagnitude(this Vector3 original, float maxMagnitude)
+        {
+            return (original.magnitude > maxMagnitude) ? original.normalized * maxMagnitude : original;
+        }
     }
 }

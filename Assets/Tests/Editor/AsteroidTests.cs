@@ -20,11 +20,12 @@ namespace Tests
         [Test]
         public void asteroids_update_their_position_based_on_velocity()
         {
-            Asteroid asteroid = An.Asteroid.WithVelocity(Vector3.forward);
+            Asteroid asteroid = An.Asteroid.WithPosition(Vector3.zero).WithVelocity(Vector3.up);
+            
             TestableTime.AdvanceSeconds(1f);
             UpdateCaller.SendUpdate();
             
-            var distance = Vector3.Distance(Vector3.forward, asteroid.Position);
+            var distance = Vector3.Distance(Vector3.up, asteroid.Position);
             Assert.AreEqual(0f, distance, _distanceTolerance);
         }
 
@@ -36,7 +37,8 @@ namespace Tests
                 var breakdownsRemaining = 3;
                 var breakdownPieces = 2;
                 AsteroidManager.Instance.Reset();
-                Asteroid asteroid = An.Asteroid.WithBreakdownsRemaining(breakdownsRemaining).
+                Asteroid asteroid = An.Asteroid.
+                    WithBreakdownsRemaining(breakdownsRemaining).
                     WithBreakdownPieces(breakdownPieces);
                 AsteroidManager.Instance.Add(asteroid);
                 var initialAsteroidCount= AsteroidManager.Instance.AsteroidCount;
@@ -85,6 +87,7 @@ namespace Tests
                 _distanceTolerance = 0.105f;
                 TestableTime.ResetTime();
                 UpdateCaller.Reset();
+                AsteroidManager.Instance.Reset();
             }
 
             [Test]
@@ -122,9 +125,9 @@ namespace Tests
             [Test]
             public void asteroid_wraps_position_when_traveling_negative_on_y()
             {
-                var endPosition = new Vector3(0,_halfWorldPlusAsteroidSize - 1f,0);
+                var endPosition = new Vector3(2, _halfWorldPlusAsteroidSize - 1f,0);
                 Asteroid asteroid = An.Asteroid.
-                    WithPosition(new Vector3(0,-_halfWorldPlusAsteroidSize, 0)).
+                    WithPosition(new Vector3(2,-_halfWorldPlusAsteroidSize, 0)).
                     WithVelocity(new Vector3(0,-_velocityMagnitude, 0)).
                     WithSize(_asteroidSize, _asteroidSize);
                 
@@ -154,10 +157,10 @@ namespace Tests
             [Test]
             public void asteroid_wraps_position_when_traveling_diagonally_positive_on_x_and_y()
             {
-                var endPosition = new Vector3(-_halfWorldPlusAsteroidSize + 1f,-_halfWorldPlusAsteroidSize + 1f,0);
+                var endPosition = new Vector3(-_halfWorldPlusAsteroidSize + 1f,-_halfWorldPlusAsteroidSize + 1f,0f);
                 Asteroid asteroid = An.Asteroid.
-                    WithPosition(new Vector3(_halfWorldPlusAsteroidSize,_halfWorldPlusAsteroidSize, 0)).
-                    WithVelocity(new Vector3(_velocityMagnitude,_velocityMagnitude, 0)).
+                    WithPosition(new Vector3(_halfWorldPlusAsteroidSize,_halfWorldPlusAsteroidSize, 0f)).
+                    WithVelocity(new Vector3(_velocityMagnitude,_velocityMagnitude, 0f)).
                     WithSize(_asteroidSize, _asteroidSize);
                 
                 AdvanceOneSecondAndUpdate();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DonEnglandArt.Asteroids
 {
@@ -25,7 +26,6 @@ namespace DonEnglandArt.Asteroids
         {
             _position = position;
             _velocity = velocity;
-            UpdateCaller.Update += Tick;
         }
 
         public void Tick()
@@ -37,11 +37,6 @@ namespace DonEnglandArt.Asteroids
         {
             HalfSizeX = xSize/2f;
             HalfSizeY = ySize/2f;
-        }
-        
-        private void Unsubscribe()
-        {
-            UpdateCaller.Update -= Tick;
         }
 
         public void SetBreakdownsRemaining(int breakdownsRemaining)
@@ -57,7 +52,6 @@ namespace DonEnglandArt.Asteroids
         public void Breakdown()
         {
             _breakdownsRemaining--;
-            UpdateCaller.Update -= Tick;
             AsteroidManager.Instance.Breakdown(this);
         }
     }

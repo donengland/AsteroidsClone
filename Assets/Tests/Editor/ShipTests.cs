@@ -21,7 +21,7 @@ namespace Tests
         {
             Ship ship = A.Ship.WithPosition(Vector3.zero).WithHeading(Vector3.up).WithThrustOn();
             
-            TestableTime.AdvanceSeconds(1f);
+            TestableTime.AdvanceSeconds(1.75f);
             UpdateCaller.SendUpdate();
             
             var distance = Vector3.Distance(Vector3.up, ship.Position);

@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input/AsteroidsActions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Input/AsteroidsActions.inputactions'
 
 using System;
 using System.Collections;
@@ -76,6 +76,17 @@ public class @AsteroidsActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1f6e52be-c9dd-4430-ac1b-f0da5cd651ce"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Thrust"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""736ba347-1db4-43ce-a78e-48eb85b670f4"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -89,6 +100,17 @@ public class @AsteroidsActions : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""b9fd6f1b-9e41-4eed-9b25-008d579dc465"",
                     ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a37d23a-5c77-4ff3-bd94-d8d6f78cb01b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -120,8 +142,30 @@ public class @AsteroidsActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f6d27c2f-3170-4879-8959-1521b8fab2ab"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""22b67289-c835-4b33-9391-296505ca381a"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4051451a-81e6-4262-9890-b24febeca518"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

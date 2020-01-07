@@ -15,6 +15,7 @@ namespace Tests
             _distanceTolerance = 0.105f;
             TestableTime.ResetTime();
             UpdateCaller.Reset();
+            AsteroidManager.Instance.Reset();
         }
         
         [Test]

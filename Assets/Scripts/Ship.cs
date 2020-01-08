@@ -24,7 +24,7 @@ namespace DonEnglandArt.Asteroids
             _position = position;
             HalfSizeX = 0.03f;
             HalfSizeY = 0.03f;
-            _turnSpeed = 10f;
+            _turnSpeed = 5f;
             _heading = new SteerableDirection(heading);
             _thruster = new InertialThruster(_heading);
             UpdateCaller.Update += Tick;

@@ -14,7 +14,7 @@
         {
             _thrustOn = false;
             _currentThrust = 0f;
-            _thrustRate = 0.5f;
+            _thrustRate = 0.25f;
             _maxThrust = 10f;
             UpdateCaller.Update += Update;
         }

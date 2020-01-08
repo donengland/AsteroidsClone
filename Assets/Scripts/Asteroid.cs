@@ -5,32 +5,32 @@ namespace DonEnglandArt.Asteroids
 {
     public class Asteroid : IWrapInBounds
     {
-        private Vector3 _position;
-        private readonly Vector3 _velocity;
-        private int _breakdownsRemaining;
-        private int _breakdownPieces;
+        public static event Action<Asteroid> breakdown;
+        
+        public int BreakdownsRemaining { get; private set; }
 
-        public int BreakdownsRemaining => _breakdownsRemaining;
+        public Vector3 Position { get; private set; }
 
-        public Vector3 Position => _position;
+        public Vector3 Velocity { get; private set; }
+
         public float HalfSizeX { get; private set; }
         public float HalfSizeY { get; private set; }
-        public int BreakdownPieces => _breakdownPieces;
+        public int BreakdownPieces { get; private set; }
 
         public void WrapTo(Vector3 position)
         {
-            _position = position;
+            Position = position;
         }
 
         public Asteroid(Vector3 position, Vector3 velocity)
         {
-            _position = position;
-            _velocity = velocity;
+            Position = position;
+            Velocity = velocity;
         }
 
         public void Tick()
         {
-            _position += TestableTime.deltaTime * _velocity;
+            Position += TestableTime.deltaTime * Velocity;
         }
 
         public void SetSize(float xSize, float ySize)
@@ -41,18 +41,18 @@ namespace DonEnglandArt.Asteroids
 
         public void SetBreakdownsRemaining(int breakdownsRemaining)
         {
-            _breakdownsRemaining = breakdownsRemaining;
+            BreakdownsRemaining = breakdownsRemaining;
         }
 
         public void SetBreakdownPieces(int breakdownPieces)
         {
-            _breakdownPieces = breakdownPieces;
+            BreakdownPieces = breakdownPieces;
         }
 
         public void Breakdown()
         {
-            _breakdownsRemaining--;
-            AsteroidManager.Instance.Breakdown(this);
+            BreakdownsRemaining--;
+            breakdown?.Invoke(this);
         }
     }
 }

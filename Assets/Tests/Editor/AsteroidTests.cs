@@ -158,7 +158,7 @@ namespace Tests
             [Test]
             public void asteroid_wraps_position_when_traveling_diagonally_positive_on_x_and_y()
             {
-                var endPosition = new Vector3(-_halfWorldPlusAsteroidSize + 1f,-_halfWorldPlusAsteroidSize + 1f,0f);
+                var endPosition = new Vector3(-_halfWorldPlusAsteroidSize + 1.12f,-_halfWorldPlusAsteroidSize + 1.12f,0f);
                 Asteroid asteroid = An.Asteroid.
                     WithPosition(new Vector3(_halfWorldPlusAsteroidSize,_halfWorldPlusAsteroidSize, 0f)).
                     WithVelocity(new Vector3(_velocityMagnitude,_velocityMagnitude, 0f)).

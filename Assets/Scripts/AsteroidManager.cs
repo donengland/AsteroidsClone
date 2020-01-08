@@ -15,6 +15,7 @@ namespace DonEnglandArt.Asteroids
         
         public static AsteroidManager Instance => _lazy.Value;
         public event Action<int> Scored;
+        public event Action<Asteroid> Created;
         
         public int AsteroidCount => _asteroids.Count;
 
@@ -22,10 +23,27 @@ namespace DonEnglandArt.Asteroids
         {
             _asteroids = new List<Asteroid>();
             _spaceBounds = new Bounds(Vector3.zero, new Vector3(16f, 9f, 0f));
-            UpdateCaller.Update += Tick;
+            Subscribe();
         }
 
-        private void Tick()
+        public void Add(Asteroid asteroid)
+        {
+            _asteroids.Add(asteroid);
+        }
+
+        public void Reset()
+        {
+            _asteroids.Clear();
+            Unsubscribe();
+            Subscribe();
+        }
+
+        public Bounds GetBounds()
+        {
+            return _spaceBounds;
+        }
+
+        private void OnTick()
         {
             foreach (var asteroid in _asteroids)
             {
@@ -33,7 +51,7 @@ namespace DonEnglandArt.Asteroids
             }
         }
 
-        public void Breakdown(Asteroid asteroid)
+        private void OnBreakdown(Asteroid asteroid)
         {
             Scored?.Invoke((asteroid.BreakdownsRemaining + 1) * 100);
             if (asteroid.BreakdownsRemaining > 0)
@@ -47,35 +65,50 @@ namespace DonEnglandArt.Asteroids
         {
             for (int i = 0; i < asteroid.BreakdownPieces; i++)
             {
-                CreateRandomAsteroid(asteroid);
+                CreateAsteroidAt(PositionInAsteroidBounds(asteroid));
             }
         }
 
-        private void CreateRandomAsteroid(Asteroid asteroid)
+        private void CreateAsteroidAt(Vector3 position)
         {
-            var position = asteroid.Position.Plus(
+            var velocity = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f);
+            var asteroid = new Asteroid(position, velocity);
+            Add(asteroid);
+            Created?.Invoke(asteroid);
+        }
+
+        private Vector3 PositionInAsteroidBounds(Asteroid asteroid)
+        {
+            return asteroid.Position.Plus(
                 Random.Range(-asteroid.HalfSizeX, asteroid.HalfSizeX),
                 Random.Range(-asteroid.HalfSizeY, asteroid.HalfSizeY), 0f);
-            var velocity = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f);
-            var breakDownAsteroid = new Asteroid(position, velocity);
-            Add(breakDownAsteroid);
         }
 
-        public void Add(Asteroid asteroid)
+        public void CreateRandomAsteroids(int count)
         {
-            _asteroids.Add(asteroid);
+            for (int i = 0; i < count; i++)
+            {
+                CreateAsteroidAt(PositionOnSpaceBounds());
+            }
         }
 
-        public void Reset()
+        private Vector3 PositionOnSpaceBounds()
         {
-            _asteroids.Clear();
-            UpdateCaller.Update -= Tick;
-            UpdateCaller.Update += Tick;
+            var position = new Vector3(Random.Range(_spaceBounds.min.x, _spaceBounds.max.x),
+                Random.Range(_spaceBounds.min.y, _spaceBounds.max.y), 0f);
+            return _spaceBounds.ClosestPoint(position);
         }
 
-        public Bounds GetBounds()
+        private void Subscribe()
         {
-            return _spaceBounds;
+            UpdateCaller.Update += OnTick;
+            Asteroid.breakdown += OnBreakdown;
+        }
+
+        private void Unsubscribe()
+        {
+            UpdateCaller.Update -= OnTick;
+            Asteroid.breakdown -= OnBreakdown;
         }
     }
 }

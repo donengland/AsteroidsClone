@@ -22,6 +22,7 @@
           <e p="IReceiveShipCommands.cs" t="Include" />
           <e p="ISteerable2D.cs" t="Include" />
           <e p="MonoAsteroid.cs" t="Include" />
+          <e p="MonoAsteroidManager.cs" t="Include" />
           <e p="MonoShip.cs" t="Include" />
           <e p="ScoreManager.cs" t="Include" />
           <e p="Ship.cs" t="Include" />

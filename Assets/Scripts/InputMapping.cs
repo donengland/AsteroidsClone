@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-namespace DonEnglandArt.Asteroids
+namespace DonEnglandArt
 {
     public class InputMapping
     {
-        private Dictionary<string, InputAction> _actions;
+        private Dictionary<string, InputAction> _actions = null;
         private readonly PlayerInput _playerInput;
 
         public InputMapping(PlayerInput playerInput)

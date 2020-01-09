@@ -10,12 +10,12 @@ namespace DonEnglandArt.Asteroids
 
         public Vector3 Velocity { get; private set; }
 
-        public InertialThruster(SteerableDirection heading)
+        public InertialThruster(IProvideUpdates updater, SteerableDirection heading)
         {
-            _thruster = new Thruster();
+            _thruster = new Thruster(updater);
             _dampenVelocityRate = 0.2f;
             _heading = heading;
-            UpdateCaller.Update += Update;
+            updater.Update += Tick;
         }
 
         public void ThrustOn()
@@ -28,7 +28,7 @@ namespace DonEnglandArt.Asteroids
             _thruster.ThrustOff();
         }
         
-        private void Update()
+        private void Tick()
         {
             Velocity += _thruster.CurrentThrust * _heading.Forward;
             Velocity = Velocity.SetMagnitude(_thruster.MaxThrust);

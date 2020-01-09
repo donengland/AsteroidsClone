@@ -7,11 +7,11 @@ namespace DonEnglandArt.Asteroids
         private float _turnAngle;
         public Vector3 Forward { get; private set; }
 
-        public SteerableDirection(Vector3 forward)
+        public SteerableDirection(IProvideUpdates updater, Vector3 forward)
         {
             _turnAngle = 0;
             Forward = forward;
-            UpdateCaller.Update += Update;
+            updater.Update += Tick;
         }
 
         public void DegreesPerSecond(float degrees)
@@ -19,7 +19,7 @@ namespace DonEnglandArt.Asteroids
             _turnAngle = degrees;
         }
 
-        private void Update()
+        private void Tick()
         {
             var turnAmount = _turnAngle * TestableTime.deltaTime;
             var newX = Forward.x * Mathf.Cos(turnAmount) - (Forward.y * Mathf.Sin(turnAmount));

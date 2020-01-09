@@ -11,8 +11,6 @@ namespace DonEnglandArt.Asteroids
         private void Awake()
         {
             _bounds = AsteroidManager.Instance.GetBounds();
-            // _asteroid = new Asteroid(transform.position, _velocity);
-            // AsteroidManager.Instance.Add(_asteroid);
         }
 
         public void SetAsteroid(Asteroid asteroid)

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace DonEnglandArt.Asteroids
@@ -13,7 +12,7 @@ namespace DonEnglandArt.Asteroids
 
         private void Awake()
         {
-            _ship = new Ship(transform.position, Vector3.up);
+            _ship = new Ship(UpdateManager.Instance, transform.position, Vector3.up);
             _ship.SetTransform(transform);
             _bounds = AsteroidManager.Instance.GetBounds();
             var playerInput = GetComponent<PlayerInput>();

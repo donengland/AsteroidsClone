@@ -1,5 +1,6 @@
-﻿using DonEnglandArt.Asteroids;
-using UnityEngine;
+﻿using UnityEngine;
+using DonEnglandArt;
+using DonEnglandArt.Asteroids;
 
 namespace Tests
 {
@@ -8,6 +9,7 @@ namespace Tests
         private Vector3 _position;
         private Vector3 _heading;
         private Vector3 _maxVelocity = Vector3.one;
+        private IProvideUpdates _updater;
         private bool _thrustOn;
 
         public ShipBuilder WithPosition(Vector3 position)
@@ -34,9 +36,15 @@ namespace Tests
             return this;
         }
 
+        public ShipBuilder WithUpdateProvider(IProvideUpdates updater)
+        {
+            _updater = updater;
+            return this;
+        }
+
         public Ship Build()
         {
-            var ship = new Ship(_position, _heading);
+            var ship = new Ship(_updater ?? UpdateManager.Instance, _position, _heading);
             if (_thrustOn) ship.ThrustOn();
             return ship;
         }

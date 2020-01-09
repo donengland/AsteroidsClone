@@ -7,10 +7,13 @@
           <e p="Asteroid.cs" t="Include" />
           <e p="AsteroidManager.cs" t="Include" />
           <e p="Core" t="Include">
+            <e p="IProvideUpdates.cs" t="Include" />
             <e p="IWrapInBounds.cs" t="Include" />
             <e p="MonoUpdateCaller.cs" t="Include" />
             <e p="TestableTime.cs" t="Include" />
             <e p="UpdateCaller.cs" t="Include" />
+            <e p="UpdateManager.cs" t="Include" />
+            <e p="UserInput.cs" t="Include" />
             <e p="Vector3Extensions.cs" t="Include" />
             <e p="WrapBounds2DSystem.cs" t="Include" />
           </e>
@@ -28,7 +31,6 @@
           <e p="Ship.cs" t="Include" />
           <e p="SteerableDirection.cs" t="Include" />
           <e p="Thruster.cs" t="Include" />
-          <e p="UserInput.cs" t="Include" />
         </e>
         <e p="Tests" t="Include">
           <e p="Editor" t="Include">

@@ -19,15 +19,15 @@ namespace DonEnglandArt.Asteroids
         public float HalfSizeX { get; private set; }
         public float HalfSizeY { get; private set; }
 
-        public Ship(Vector3 position, Vector3 heading)
+        public Ship(IProvideUpdates updater, Vector3 position, Vector3 heading)
         {
             _position = position;
             HalfSizeX = 0.03f;
             HalfSizeY = 0.03f;
             _turnSpeed = 5f;
-            _heading = new SteerableDirection(heading);
-            _thruster = new InertialThruster(_heading);
-            UpdateCaller.Update += Tick;
+            _heading = new SteerableDirection(updater, heading);
+            _thruster = new InertialThruster(updater, _heading);
+            updater.Update += Tick;
         }
 
         public void SetTransform(Transform transform)
@@ -40,7 +40,7 @@ namespace DonEnglandArt.Asteroids
             _position = position;
         }
 
-        public void Tick()
+        private void Tick()
         {
             UpdateHeading();
             UpdatePosition();
@@ -111,11 +111,6 @@ namespace DonEnglandArt.Asteroids
             if (_transform == null) return; 
             _transform.position = _position;
             _transform.rotation = Quaternion.LookRotation(Vector3.forward, _heading.Forward);
-        }
-
-        private void Unsubscribe()
-        {
-            UpdateCaller.Update -= Tick;
         }
     }
 }

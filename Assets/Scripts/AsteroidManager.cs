@@ -53,7 +53,7 @@ namespace DonEnglandArt.Asteroids
 
         private void OnBreakdown(Asteroid asteroid)
         {
-            Scored?.Invoke((asteroid.BreakdownsRemaining + 1) * 100);
+            Scored?.Invoke((4 - asteroid.BreakdownsRemaining) * 100);
             if (asteroid.BreakdownsRemaining > 0)
             {
                 CreateBreakdownAsteroids(asteroid);
@@ -101,13 +101,13 @@ namespace DonEnglandArt.Asteroids
 
         private void Subscribe()
         {
-            UpdateCaller.Update += OnTick;
+            UpdateManager.Instance.Update += OnTick;
             Asteroid.breakdown += OnBreakdown;
         }
 
         private void Unsubscribe()
         {
-            UpdateCaller.Update -= OnTick;
+            UpdateManager.Instance.Update -= OnTick;
             Asteroid.breakdown -= OnBreakdown;
         }
     }

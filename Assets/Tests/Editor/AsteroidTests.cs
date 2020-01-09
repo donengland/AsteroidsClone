@@ -8,13 +8,19 @@ namespace Tests
     public class AsteroidTests
     {
         private float _distanceTolerance;
+        private UpdateManager _updateManager;
 
+        public AsteroidTests()
+        {
+            _updateManager = UpdateManager.Instance;
+        }
+        
         [SetUp]
         public void before_every_test()
         {
             _distanceTolerance = 0.105f;
             TestableTime.ResetTime();
-            UpdateCaller.Reset();
+            _updateManager.Reset();
             AsteroidManager.Instance.Reset();
         }
         
@@ -24,7 +30,7 @@ namespace Tests
             Asteroid asteroid = An.Asteroid.WithPosition(Vector3.zero).WithVelocity(Vector3.up);
             
             TestableTime.AdvanceSeconds(1f);
-            UpdateCaller.SendUpdate();
+            _updateManager.SendUpdate();
             
             var distance = Vector3.Distance(Vector3.up, asteroid.Position);
             Assert.AreEqual(0f, distance, _distanceTolerance);
@@ -32,33 +38,41 @@ namespace Tests
 
         public class BreakdownMethod
         {
+            private AsteroidManager _asteroidManager;
+
+            [SetUp]
+            public void before_every_test()
+            {
+                _asteroidManager = AsteroidManager.Instance;
+            }
+            
             [Test]
             public void asteroid_with_3_breakdownsRemaining_breaks_into_2_smaller_asteroids()
             {
                 var breakdownsRemaining = 3;
                 var breakdownPieces = 2;
-                AsteroidManager.Instance.Reset();
+                _asteroidManager.Reset();
                 Asteroid asteroid = An.Asteroid.
                     WithBreakdownsRemaining(breakdownsRemaining).
                     WithBreakdownPieces(breakdownPieces);
-                AsteroidManager.Instance.Add(asteroid);
-                var initialAsteroidCount= AsteroidManager.Instance.AsteroidCount;
+                _asteroidManager.Add(asteroid);
+                var initialAsteroidCount= _asteroidManager.AsteroidCount;
                 
                 asteroid.Breakdown();
                 Assert.AreEqual(breakdownsRemaining-1, asteroid.BreakdownsRemaining);
-                Assert.AreEqual(initialAsteroidCount + breakdownPieces - 1, AsteroidManager.Instance.AsteroidCount);
+                Assert.AreEqual(initialAsteroidCount + breakdownPieces - 1, _asteroidManager.AsteroidCount);
             }
             
             [Test]
             public void asteroid_with_0_breakdownsRemaining_does_not_break_into_smaller_asteroids()
             {
-                AsteroidManager.Instance.Reset();
+                _asteroidManager.Reset();
                 Asteroid asteroid = An.Asteroid.WithBreakdownsRemaining(0).WithBreakdownPieces(2);
-                AsteroidManager.Instance.Add(asteroid);
-                var initialAsteroidCount= AsteroidManager.Instance.AsteroidCount;
+                _asteroidManager.Add(asteroid);
+                var initialAsteroidCount= _asteroidManager.AsteroidCount;
                 
                 asteroid.Breakdown();
-                Assert.AreEqual(initialAsteroidCount - 1, AsteroidManager.Instance.AsteroidCount);
+                Assert.AreEqual(initialAsteroidCount - 1, _asteroidManager.AsteroidCount);
             }
         }
 
@@ -72,11 +86,17 @@ namespace Tests
             private float _halfAsteroidSize => _asteroidSize * 0.5f;
             private float _halfWorldPlusAsteroidSize => _halfWorldSize + _halfAsteroidSize;
             private Bounds _worldBounds;
+            private UpdateManager _updateManager;
+
+            public WrapToMethod()
+            {
+                _updateManager = UpdateManager.Instance;
+            }
 
             private void AdvanceOneSecondAndUpdate()
             {
                 TestableTime.AdvanceSeconds(1f);
-                UpdateCaller.SendUpdate();
+                _updateManager.SendUpdate();
             }
             
             [SetUp]
@@ -87,7 +107,7 @@ namespace Tests
                 _worldBounds = new Bounds(centerPosition, worldSize);
                 _distanceTolerance = 0.105f;
                 TestableTime.ResetTime();
-                UpdateCaller.Reset();
+                _updateManager.Reset();
                 AsteroidManager.Instance.Reset();
             }
 
@@ -158,7 +178,8 @@ namespace Tests
             [Test]
             public void asteroid_wraps_position_when_traveling_diagonally_positive_on_x_and_y()
             {
-                var endPosition = new Vector3(-_halfWorldPlusAsteroidSize + 1.12f,-_halfWorldPlusAsteroidSize + 1.12f,0f);
+                var bonusOffset = 1.07f;
+                var endPosition = new Vector3(-_halfWorldPlusAsteroidSize + bonusOffset,-_halfWorldPlusAsteroidSize + bonusOffset,0f);
                 Asteroid asteroid = An.Asteroid.
                     WithPosition(new Vector3(_halfWorldPlusAsteroidSize,_halfWorldPlusAsteroidSize, 0f)).
                     WithVelocity(new Vector3(_velocityMagnitude,_velocityMagnitude, 0f)).

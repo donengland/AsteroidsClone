@@ -5,15 +5,17 @@ namespace DonEnglandArt.Asteroids
 {
     public sealed class MonoAsteroidManager : MonoBehaviour
     {
-        [SerializeField] private MonoAsteroid _monoAsteroid; 
+        [SerializeField] private MonoAsteroid _monoAsteroid = null;
+        private AsteroidManager _asteroidManager; 
         private void Awake()
         {
-            AsteroidManager.Instance.Created += OnAsteroidCreated;
+            _asteroidManager = AsteroidManager.Instance;
+            _asteroidManager.Created += OnAsteroidCreated;
         }
 
         private void Start()
         {
-            AsteroidManager.Instance.CreateRandomAsteroids(5);
+            _asteroidManager.CreateRandomAsteroids(5);
         }
 
         private void OnAsteroidCreated(Asteroid asteroid)
@@ -26,6 +28,11 @@ namespace DonEnglandArt.Asteroids
             
             MonoAsteroid go = Instantiate(_monoAsteroid);
             go.SetAsteroid(asteroid);
+        }
+
+        private void OnDestroy()
+        {
+            _asteroidManager.Created -= OnAsteroidCreated;
         }
     }
 }

@@ -30,42 +30,42 @@ namespace DonEnglandArt.Asteroids
             _target = target;
         }
 
-        private void OnFireOff(InputAction.CallbackContext obj)
+        private void OnFireOff(InputAction.CallbackContext context)
         {
             _target.FireOff();
         }
 
-        private void OnFireOn(InputAction.CallbackContext obj)
+        private void OnFireOn(InputAction.CallbackContext context)
         {
             _target.FireOn();
         }
 
-        private void OnThrustOff(InputAction.CallbackContext obj)
+        private void OnThrustOff(InputAction.CallbackContext context)
         {
             _target?.ThrustOff();
         }
 
-        private void OnThrustOn(InputAction.CallbackContext obj)
+        private void OnThrustOn(InputAction.CallbackContext context)
         {
             _target?.ThrustOn();
         }
 
-        private void OnTurnRightEnd(InputAction.CallbackContext obj)
+        private void OnTurnRightEnd(InputAction.CallbackContext context)
         {
             _target?.TurnRightEnd();
         }
 
-        private void OnTurnRightBegin(InputAction.CallbackContext obj)
+        private void OnTurnRightBegin(InputAction.CallbackContext context)
         {
             _target?.TurnRightBegin();
         }
 
-        private void OnTurnLeftEnd(InputAction.CallbackContext obj)
+        private void OnTurnLeftEnd(InputAction.CallbackContext context)
         {
             _target?.TurnLeftEnd();
         }
 
-        private void OnTurnLeftBegin(InputAction.CallbackContext obj)
+        private void OnTurnLeftBegin(InputAction.CallbackContext context)
         {
             _target?.TurnLeftBegin();
         }

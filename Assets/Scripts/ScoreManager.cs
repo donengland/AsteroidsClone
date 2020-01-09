@@ -13,7 +13,7 @@ namespace DonEnglandArt.Asteroids
 
         private ScoreManager()
         {
-            UpdateCaller.Update += Tick;
+            UpdateManager.Instance.Update += Tick;
             AsteroidManager.Instance.Scored += OnScore;
         }
 

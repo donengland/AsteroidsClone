@@ -20,18 +20,14 @@ namespace Tests
         }
         
         [Test]
-        public void ship_updates_position_based_on_velocity()
+        public void ship_updates_position_when_thrusters_on()
         {
-            Ship ship = A.Ship.WithPosition(Vector3.zero).
-                WithUpdateProvider(_updater).
-                WithHeading(Vector3.up).
-                WithThrustOn();
+            Ship ship = A.Ship.WithPosition(Vector3.zero).WithThrustOn();
             
-            TestableTime.AdvanceSeconds(3f);
-            _updater.Update += Raise.Event<Action>();
+            TestableTime.AdvanceSeconds(1f);
+            ship.Tick();
             
-            var distance = Vector3.Distance(Vector3.up, ship.Position);
-            Assert.AreEqual(0f, distance, _distanceTolerance);
+            Assert.AreNotEqual(Vector3.zero, ship.Position);
         }
     }
 }

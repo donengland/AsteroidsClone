@@ -6,8 +6,11 @@
         <e p="Scripts" t="Include">
           <e p="Asteroid.cs" t="Include" />
           <e p="AsteroidManager.cs" t="Include" />
+          <e p="Bullet.cs" t="Include" />
+          <e p="BulletManager.cs" t="Include" />
           <e p="Core" t="Include">
-            <e p="IProvideUpdates.cs" t="Include" />
+            <e p="BoundsExtensions.cs" t="Include" />
+            <e p="Cooldown.cs" t="Include" />
             <e p="IWrapInBounds.cs" t="Include" />
             <e p="MonoUpdateCaller.cs" t="Include" />
             <e p="TestableTime.cs" t="Include" />
@@ -26,6 +29,8 @@
           <e p="ISteerable2D.cs" t="Include" />
           <e p="MonoAsteroid.cs" t="Include" />
           <e p="MonoAsteroidManager.cs" t="Include" />
+          <e p="MonoBullet.cs" t="Include" />
+          <e p="MonoBulletManager.cs" t="Include" />
           <e p="MonoShip.cs" t="Include" />
           <e p="ScoreManager.cs" t="Include" />
           <e p="Ship.cs" t="Include" />

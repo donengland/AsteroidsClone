@@ -12,7 +12,7 @@ namespace DonEnglandArt.Asteroids
 
         private void Awake()
         {
-            _ship = new Ship(UpdateManager.Instance, transform.position, Vector3.up);
+            _ship = new Ship(transform.position, Vector3.up);
             _ship.SetTransform(transform);
             _bounds = AsteroidManager.Instance.GetBounds();
             var playerInput = GetComponent<PlayerInput>();
@@ -22,17 +22,18 @@ namespace DonEnglandArt.Asteroids
 
         private void Update()
         {
+            _ship.Tick();
             WrapBounds2DSystem.ProcessMove(_ship as IWrapInBounds, _bounds);
         }
 
         public void FireOn()
         {
-            Debug.Log($"FireOn");
+            _ship.FireOn();
         }
 
         public void FireOff()
         {
-            Debug.Log($"FireOff");
+            _ship.FireOff();
         }
 
         public void ThrustOn()

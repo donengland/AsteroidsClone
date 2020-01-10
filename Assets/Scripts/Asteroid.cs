@@ -22,10 +22,12 @@ namespace DonEnglandArt.Asteroids
             Position = position;
         }
 
-        public Asteroid(Vector3 position, Vector3 velocity)
+        public Asteroid(Vector3 position, Vector3 velocity, int breakdownsRemaining)
         {
             Position = position;
             Velocity = velocity;
+            BreakdownPieces = 2;
+            BreakdownsRemaining = breakdownsRemaining;
         }
 
         public void Tick()

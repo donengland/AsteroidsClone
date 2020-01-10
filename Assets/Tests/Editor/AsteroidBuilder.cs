@@ -45,9 +45,8 @@ namespace Tests
 
         private Asteroid Build()
         {
-            Asteroid asteroid = new Asteroid(_position, _velocity);
+            Asteroid asteroid = new Asteroid(_position, _velocity, _breakdownsRemaining);
             asteroid.SetSize(_xSize, _ySize);
-            asteroid.SetBreakdownsRemaining(_breakdownsRemaining);
             asteroid.SetBreakdownPieces(_breakdownPieces);
             AsteroidManager.Instance.Add(asteroid);
             return asteroid;

@@ -10,13 +10,12 @@
         public float CurrentThrust => _currentThrust;
         public float MaxThrust => _maxThrust;
 
-        public Thruster(IProvideUpdates updater)
+        public Thruster()
         {
             _thrustOn = false;
             _currentThrust = 0f;
-            _thrustRate = 0.25f;
-            _maxThrust = 10f;
-            updater.Update += Tick;
+            _thrustRate = 0.1f;
+            _maxThrust = 8f;
         }
 
         public void ThrustOn()
@@ -30,7 +29,7 @@
             _currentThrust = 0f;
         }
         
-        private void Tick()
+        public void Tick()
         {
             if (!_thrustOn) return;
             

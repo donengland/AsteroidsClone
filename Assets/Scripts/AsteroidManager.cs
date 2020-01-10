@@ -48,6 +48,7 @@ namespace DonEnglandArt.Asteroids
             foreach (var asteroid in _asteroids)
             {
                 asteroid.Tick();
+                WrapBounds2DSystem.ProcessMove(asteroid, _spaceBounds);
             }
         }
 
@@ -65,14 +66,14 @@ namespace DonEnglandArt.Asteroids
         {
             for (int i = 0; i < asteroid.BreakdownPieces; i++)
             {
-                CreateAsteroidAt(PositionInAsteroidBounds(asteroid));
+                CreateAsteroidAt(PositionInAsteroidBounds(asteroid), asteroid.BreakdownsRemaining);
             }
         }
 
-        private void CreateAsteroidAt(Vector3 position)
+        private void CreateAsteroidAt(Vector3 position, int breakdowns)
         {
             var velocity = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f);
-            var asteroid = new Asteroid(position, velocity);
+            var asteroid = new Asteroid(position, velocity, breakdowns);
             Add(asteroid);
             Created?.Invoke(asteroid);
         }
@@ -88,15 +89,8 @@ namespace DonEnglandArt.Asteroids
         {
             for (int i = 0; i < count; i++)
             {
-                CreateAsteroidAt(PositionOnSpaceBounds());
+                CreateAsteroidAt(_spaceBounds.PointOnBounds2D(), 3);
             }
-        }
-
-        private Vector3 PositionOnSpaceBounds()
-        {
-            var position = new Vector3(Random.Range(_spaceBounds.min.x, _spaceBounds.max.x),
-                Random.Range(_spaceBounds.min.y, _spaceBounds.max.y), 0f);
-            return _spaceBounds.ClosestPoint(position);
         }
 
         private void Subscribe()

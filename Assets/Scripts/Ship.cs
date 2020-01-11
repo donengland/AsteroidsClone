@@ -33,7 +33,7 @@ namespace DonEnglandArt.Asteroids
             _turnSpeed = 5f;
             _fireCooldown = new Cooldown(0.4f);
             _heading = new SteerableDirection(heading);
-            _thruster = new InertialThruster(_heading);
+            _thruster = new InertialThruster(_heading, 0.2f, 0.1f, 8f);
         }
 
         public void SetTransform(Transform transform)

@@ -11,6 +11,7 @@
           <e p="Core" t="Include">
             <e p="BoundsExtensions.cs" t="Include" />
             <e p="Cooldown.cs" t="Include" />
+            <e p="IProvideUpdates.cs" t="Include" />
             <e p="IWrapInBounds.cs" t="Include" />
             <e p="MonoUpdateCaller.cs" t="Include" />
             <e p="TestableTime.cs" t="Include" />
@@ -44,6 +45,8 @@
             <e p="Builders.cs" t="Include" />
             <e p="ShipBuilder.cs" t="Include" />
             <e p="ShipTests.cs" t="Include" />
+            <e p="ThrusterBuilder.cs" t="Include" />
+            <e p="ThrusterTests.cs" t="Include" />
             <e p="Vector3ExtensionsTests.cs" t="Include" />
             <e p="WrapBounds2DSystemTests.cs" t="Include" />
           </e>

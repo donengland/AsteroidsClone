@@ -10,10 +10,10 @@ namespace DonEnglandArt.Asteroids
 
         public Vector3 Velocity { get; private set; }
 
-        public InertialThruster(SteerableDirection heading)
+        public InertialThruster(SteerableDirection heading, float dampenVelocityRate, float thrustRate, float maxThrust)
         {
-            _thruster = new Thruster();
-            _dampenVelocityRate = 0.2f;
+            _thruster = new Thruster(thrustRate, maxThrust);
+            _dampenVelocityRate = dampenVelocityRate;
             _heading = heading;
         }
 

@@ -10,12 +10,12 @@
         public float CurrentThrust => _currentThrust;
         public float MaxThrust => _maxThrust;
 
-        public Thruster()
+        public Thruster(float thrustRate, float maxThrust)
         {
             _thrustOn = false;
             _currentThrust = 0f;
-            _thrustRate = 0.1f;
-            _maxThrust = 8f;
+            _thrustRate = thrustRate;
+            _maxThrust = maxThrust;
         }
 
         public void ThrustOn()

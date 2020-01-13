@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DonEnglandArt
 {
-    public class MonoUpdateCaller : MonoBehaviour
+    public class MonoUpdateManager : MonoBehaviour
     {
         private UpdateManager _updateManager;
         

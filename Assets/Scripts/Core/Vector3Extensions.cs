@@ -19,9 +19,9 @@ namespace DonEnglandArt
             return (original.magnitude > maxMagnitude) ? original.normalized * maxMagnitude : original;
         }
 
-        public static Vector3 Rotate2D(this Vector3 original, float degrees)
+        public static Vector3 RotateOnZ(this Vector3 original, float radians)
         {
-            var turnAmount = degrees * TestableTime.deltaTime;
+            var turnAmount = -radians;
             var newX = original.x * Mathf.Cos(turnAmount) - (original.y * Mathf.Sin(turnAmount));
             var newY = original.x * Mathf.Sin(turnAmount) + (original.y * Mathf.Cos(turnAmount));
             return new Vector3(newX, newY, original.z);

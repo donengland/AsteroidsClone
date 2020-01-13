@@ -6,6 +6,8 @@ namespace DonEnglandArt.Asteroids
 {
     public class Ship : IWrapInBounds, IReceiveShipCommands
     {
+        public static event Action<Ship> Fire;
+        
         private readonly InertialThruster _thruster;
         private readonly SteerableDirection _heading;
         private float _turnSpeed;
@@ -17,7 +19,6 @@ namespace DonEnglandArt.Asteroids
 
         private Transform _transform;
         private Vector3 _position;
-        public static event Action<Ship> Fire;
 
         public Vector3 Position => _position;
         public Vector3 Heading => _heading.Forward;
@@ -30,8 +31,8 @@ namespace DonEnglandArt.Asteroids
             _position = position;
             HalfSizeX = 0.03f;
             HalfSizeY = 0.03f;
-            _turnSpeed = 5f;
-            _fireCooldown = new Cooldown(0.4f);
+            _turnSpeed = 270f;
+            _fireCooldown = new Cooldown(0.35f);
             _heading = new SteerableDirection(heading);
             _thruster = new InertialThruster(_heading, 0.2f, 0.1f, 8f);
         }
@@ -96,19 +97,19 @@ namespace DonEnglandArt.Asteroids
 
         private void UpdateHeading()
         {
-            _heading.Tick();
             if (!(_turnLeft ^ _turnRight))
             {
                 _heading.DegreesPerSecond(0f);
             }
             if (_turnLeft)
             {
-                _heading.DegreesPerSecond(_turnSpeed);
+                _heading.DegreesPerSecond(-_turnSpeed);
             }
             if (_turnRight)
             {
-                _heading.DegreesPerSecond(-_turnSpeed);
+                _heading.DegreesPerSecond(_turnSpeed);
             }
+            _heading.Tick();
         }
 
         private void UpdatePosition()

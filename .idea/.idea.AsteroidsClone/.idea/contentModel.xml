@@ -13,7 +13,7 @@
             <e p="Cooldown.cs" t="Include" />
             <e p="IProvideUpdates.cs" t="Include" />
             <e p="IWrapInBounds.cs" t="Include" />
-            <e p="MonoUpdateCaller.cs" t="Include" />
+            <e p="MonoUpdateManager.cs" t="Include" />
             <e p="TestableTime.cs" t="Include" />
             <e p="UpdateCaller.cs" t="Include" />
             <e p="UpdateManager.cs" t="Include" />
@@ -21,6 +21,7 @@
             <e p="Vector3Extensions.cs" t="Include" />
             <e p="WrapBounds2DSystem.cs" t="Include" />
           </e>
+          <e p="FloatAccelerator.cs" t="Include" />
           <e p="InertialThruster.cs" t="Include" />
           <e p="Input" t="Include">
             <e p="AsteroidsActions.cs" t="Include" />
@@ -36,17 +37,18 @@
           <e p="ScoreManager.cs" t="Include" />
           <e p="Ship.cs" t="Include" />
           <e p="SteerableDirection.cs" t="Include" />
-          <e p="Thruster.cs" t="Include" />
         </e>
         <e p="Tests" t="Include">
           <e p="Editor" t="Include">
             <e p="AsteroidBuilder.cs" t="Include" />
             <e p="AsteroidTests.cs" t="Include" />
             <e p="Builders.cs" t="Include" />
+            <e p="FloatAcceleratorBuilder.cs" t="Include" />
+            <e p="FloatAccleratorTests.cs" t="Include" />
             <e p="ShipBuilder.cs" t="Include" />
             <e p="ShipTests.cs" t="Include" />
-            <e p="ThrusterBuilder.cs" t="Include" />
-            <e p="ThrusterTests.cs" t="Include" />
+            <e p="SteerableDirectionBuilder.cs" t="Include" />
+            <e p="SteerableDirectionTests.cs" t="Include" />
             <e p="Vector3ExtensionsTests.cs" t="Include" />
             <e p="WrapBounds2DSystemTests.cs" t="Include" />
           </e>

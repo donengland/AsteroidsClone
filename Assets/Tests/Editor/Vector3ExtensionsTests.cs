@@ -48,9 +48,53 @@ namespace Tests
             }
         }
 
-        public class PlusExtension
+        public class Rotate2DExtension
         {
+            private const float RotationTolerance = 0.01f;
+
+            [Test]
+            public void rotate_up_PI_over_2_returns_right()
+            {
+                var result = Vector3.up.RotateOnZ(Mathf.PI/2f);
+                var resultX = result.x;
+                var resultY = result.y;
+                
+                Assert.AreEqual(Vector3.right.x, resultX, RotationTolerance);
+                Assert.AreEqual(Vector3.right.y, resultY, RotationTolerance);
+            }
             
+            [Test]
+            public void rotate_up_negative_PI_over_2_returns_right()
+            {
+                var result = Vector3.up.RotateOnZ(-Mathf.PI/2f);
+                var resultX = result.x;
+                var resultY = result.y;
+                
+                Assert.AreEqual(Vector3.left.x, resultX, RotationTolerance);
+                Assert.AreEqual(Vector3.left.y, resultY, RotationTolerance);
+            }
+            
+            [Test]
+            public void rotate_up_PI_returns_down()
+            {
+                var result = Vector3.up.RotateOnZ(Mathf.PI);
+                var resultX = result.x;
+                var resultY = result.y;
+                
+                Assert.AreEqual(Vector3.down.x, resultX, RotationTolerance);
+                Assert.AreEqual(Vector3.down.y, resultY, RotationTolerance);
+            }
+            
+            [Test]
+            public void rotate_up_2_PI_returns_up()
+            {
+                var result = Vector3.up.RotateOnZ(2f*Mathf.PI);
+                var resultX = result.x;
+                var resultY = result.y;
+                
+                Assert.AreEqual(Vector3.up.x, resultX, RotationTolerance);
+                Assert.AreEqual(Vector3.up.y, resultY, RotationTolerance);
+            }
         }
     }
 }

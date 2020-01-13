@@ -4,7 +4,7 @@ namespace DonEnglandArt.Asteroids
 {
     public class InertialThruster
     {
-        private readonly Thruster _thruster;
+        private readonly FloatAccelerator _floatAccelerator;
         private readonly SteerableDirection _heading;
         private readonly float _dampenVelocityRate;
 
@@ -12,26 +12,26 @@ namespace DonEnglandArt.Asteroids
 
         public InertialThruster(SteerableDirection heading, float dampenVelocityRate, float thrustRate, float maxThrust)
         {
-            _thruster = new Thruster(thrustRate, maxThrust);
+            _floatAccelerator = new FloatAccelerator(thrustRate, maxThrust);
             _dampenVelocityRate = dampenVelocityRate;
             _heading = heading;
         }
 
         public void ThrustOn()
         {
-            _thruster.ThrustOn();
+            _floatAccelerator.AccelerationOn();
         }
 
         public void ThrustOff()
         {
-            _thruster.ThrustOff();
+            _floatAccelerator.AccelerationOff();
         }
         
         public void Tick()
         {
-            _thruster.Tick();
-            Velocity += _thruster.CurrentThrust * _heading.Forward;
-            Velocity = Velocity.SetMagnitude(_thruster.MaxThrust);
+            _floatAccelerator.Tick();
+            Velocity += _floatAccelerator.CurrentAcceleration * _heading.Forward;
+            Velocity = Velocity.SetMagnitude(_floatAccelerator.MaxAcceleration);
             DampenVelocity();
         }
         

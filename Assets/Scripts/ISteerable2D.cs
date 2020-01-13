@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DonEnglandArt.Asteroids
+namespace DonEnglandArt
 {
     public interface ISteerable2D
     {

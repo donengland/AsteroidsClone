@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DonEnglandArt.Asteroids
+namespace DonEnglandArt
 {
     public class SteerableDirection : ISteerable2D
     {
@@ -15,12 +15,12 @@ namespace DonEnglandArt.Asteroids
 
         public void DegreesPerSecond(float degrees)
         {
-            _turnAngle = degrees;
+            _turnAngle = degrees * Mathf.Deg2Rad;
         }
 
         public void Tick()
         {
-            Forward = Forward.Rotate2D(_turnAngle);
+            Forward = Forward.RotateOnZ(_turnAngle*TestableTime.deltaTime);
         }
     }
 }

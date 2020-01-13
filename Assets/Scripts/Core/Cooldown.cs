@@ -4,7 +4,7 @@ namespace DonEnglandArt.Asteroids
 {
     public class Cooldown
     {
-        private float _seconds;
+        private readonly float _seconds;
         private float _current;
 
         public bool IsReady => _current <= 0f;

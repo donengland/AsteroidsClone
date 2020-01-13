@@ -10,6 +10,8 @@ namespace DonEnglandArt.Asteroids
         private Ship _ship;
         private Bounds _bounds;
 
+        [SerializeField] private Vector3 _heading;
+
         private void Awake()
         {
             _ship = new Ship(transform.position, Vector3.up);
@@ -23,6 +25,7 @@ namespace DonEnglandArt.Asteroids
         private void Update()
         {
             _ship.Tick();
+            _heading = _ship.Heading;
             WrapBounds2DSystem.ProcessMove(_ship as IWrapInBounds, _bounds);
         }
 

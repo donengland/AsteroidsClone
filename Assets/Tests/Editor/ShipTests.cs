@@ -29,5 +29,18 @@ namespace Tests
             
             Assert.AreNotEqual(Vector3.zero, ship.Position);
         }
+        
+        [Test]
+        public void ship_sends_fire_when_ordered_to_fire()
+        {
+            Ship ship = A.Ship.WithPosition(Vector3.zero).WithFiringOn();
+            var wasCalled = false;
+            Ship.Fire += delegate(Ship sendingShip) { if (sendingShip == ship) wasCalled = true; };
+            
+            TestableTime.AdvanceSeconds(1f);
+            ship.Tick();
+            
+            Assert.AreEqual(true, wasCalled);
+        }
     }
 }

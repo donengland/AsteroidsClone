@@ -3,7 +3,8 @@
     public static class A
     {
         public static ShipBuilder Ship => new ShipBuilder();
-        public static ThrusterBuilder Thruster => new ThrusterBuilder();
+        public static FloatAcceleratorBuilder FloatAccelerator => new FloatAcceleratorBuilder();
+        public static SteerableDirectionBuilder SteerableDirection => new SteerableDirectionBuilder();
     }
 
     public static class An
